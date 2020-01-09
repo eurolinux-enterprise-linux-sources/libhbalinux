@@ -1,0 +1,40 @@
+From 47d8dca418b54847eac9d791e0895b31a7b41089 Mon Sep 17 00:00:00 2001
+From: Neerav Parikh <neerav.parikh@intel.com>
+Date: Wed, 11 Jan 2012 06:18:10 +0000
+Subject: [PATCH] libhbalinux: Set SerialNumber to "Unknown" if not found
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+This patch initializes SerialNumber field to a default
+value "Unknown". In case of any error or if the PCI device
+doesn't have the PCIe Device Serial Number Capability the
+default value will be returned for this field.
+
+Signed-off-by: Neerav Parikh <neerav.parikh@intel.com>
+Tested-by: Ross Brattain <ross.b.brattain@intel.com>
+Reviewed-by: Yi Zou <yi.zou@intel.com>
+Signed-off-by: Robert Love <robert.w.love@intel.com>
+Signed-off-by: Petr Šabata <contyk@redhat.com>
+---
+ pci.c |    4 ++++
+ 1 files changed, 4 insertions(+), 0 deletions(-)
+
+diff --git a/pci.c b/pci.c
+index 70b9d6a..642e33b 100644
+--- a/pci.c
++++ b/pci.c
+@@ -34,6 +34,10 @@ get_device_serial_number(struct pci_device *dev, struct hba_info *hba_info)
+ 	u_int32_t dword_high = 0;
+ 	int rc;
+ 
++	/* Default */
++	snprintf(hba_info->SerialNumber,
++		 sizeof(hba_info->SerialNumber),
++		 "Unknown");
+ 	/*
+ 	 * Read the Status Register in the PCIe configuration
+ 	 * header space to see if the PCI Capability List is
+-- 
+1.7.7.6
+

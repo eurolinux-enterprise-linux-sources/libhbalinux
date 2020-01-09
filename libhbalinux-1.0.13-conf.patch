@@ -1,9 +1,12 @@
---- libhbalinux-1.0.9/Makefile.am.orig	2010-01-13 11:28:40.000000000 +0100
-+++ libhbalinux-1.0.9/Makefile.am	2010-01-13 11:28:57.000000000 +0100
-@@ -10,22 +10,3 @@ libhbalinux_la_LIBADD = $(PCIACCESS_LIBS
+diff --git a/Makefile.am b/Makefile.am
+index 1349e7b..7c5ac14 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -12,23 +12,3 @@ pkgconfigdir = $(libdir)/pkgconfig
+ pkgconfig_DATA = libhbalinux.pc
  
- dist_noinst_DATA = README COPYING INSTALL libhbalinux.spec
- 
+ dist_noinst_DATA = README COPYING INSTALL libhbalinux.pc.in libhbalinux.spec
+-
 -install-data-hook: libhbalinux.la
 -	. $${PWD}/$<; \
 -	ORG=org.open-fcoe.libhbalinux; \
