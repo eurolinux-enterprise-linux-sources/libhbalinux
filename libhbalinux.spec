@@ -1,15 +1,11 @@
 Name:           libhbalinux
-Version:        1.0.14
+Version:        1.0.16
 Release:        1%{?dist}
 Summary:        FC-HBAAPI implementation using scsi_transport_fc interfaces
 Group:          System Environment/Libraries
 License:        LGPLv2
 URL:            http://www.open-fcoe.org
 # This source was cloned from upstream git
-# To get the tar package, just run:
-# git clone git://open-fcoe.org/openfc/libhbalinux.git && cd libhbalinux
-# git archive --prefix=libhbalinux-%{version}/ v%{version} > ../libhbalinux-%{version}.tar
-# cd .. && gzip libhbalinux-%{version}.tar
 Source0:        %{name}-%{version}.tar.gz
 Patch0:         libhbalinux-1.0.13-conf.patch
 BuildRequires:  libhbaapi-devel libpciaccess-devel libtool automake
@@ -74,6 +70,10 @@ fi
 %{_libdir}/%{name}.so
 
 %changelog
+* Thu Jun 20 2013 Petr Šabata <contyk@redhat.com> - 1.0.16-1
+- 1.0.16 bump, documentation and autotools scripts updates (#829810)
+- Fix an old bogus date in the changelog
+
 * Thu Aug 16 2012 Petr Šabata <contyk@redhat.com> - 1.0.14-1
 - 1.0.14 bump, no code changes (#819936)
 
@@ -110,7 +110,7 @@ fi
 * Fri Jul 24 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.0.7-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_12_Mass_Rebuild
 
-* Tue Apr 01 2009 Jan Zeleny <jzeleny@redhat.com> - 1.0.7-3
+* Wed Apr 01 2009 Jan Zeleny <jzeleny@redhat.com> - 1.0.7-3
 - replaced unofficial 1.0.7 source tarball with official one
 - update of Makefile, part of it moved to postinstall section
   of spec file
