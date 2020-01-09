@@ -1,5 +1,5 @@
 Name:           libhbalinux
-Version:        1.0.13
+Version:        1.0.14
 Release:        1%{?dist}
 Summary:        FC-HBAAPI implementation using scsi_transport_fc interfaces
 Group:          System Environment/Libraries
@@ -12,7 +12,6 @@ URL:            http://www.open-fcoe.org
 # cd .. && gzip libhbalinux-%{version}.tar
 Source0:        %{name}-%{version}.tar.gz
 Patch0:         libhbalinux-1.0.13-conf.patch
-Patch1:         libhbalinux-1.0.13-Set-SerialNumber-to-Unknown-if-not-found.patch
 BuildRequires:  libhbaapi-devel libpciaccess-devel libtool automake
 Requires:       libhbaapi
 
@@ -31,7 +30,6 @@ The libhbalinux-devel package contains the library pkgconfig file.
 %prep
 %setup -q
 %patch0 -p1 -b .conf
-%patch1 -p1 -b .sn-unknown
 
 %build
 ./bootstrap.sh
@@ -41,7 +39,6 @@ make %{?_smp_mflags}
 %install
 make install DESTDIR=$RPM_BUILD_ROOT
 find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
-find $RPM_BUILD_ROOT -name '*.so' -exec rm -f {} ';'
 
 %post
 /sbin/ldconfig
@@ -74,8 +71,12 @@ fi
 
 %files devel
 %{_libdir}/pkgconfig/%{name}.pc
+%{_libdir}/%{name}.so
 
 %changelog
+* Thu Aug 16 2012 Petr Šabata <contyk@redhat.com> - 1.0.14-1
+- 1.0.14 bump, no code changes (#819936)
+
 * Thu Feb 16 2012 Petr Šabata <contyk@redhat.com> - 1.0.13-1
 - 1.0.13 bump + 47d8dca, "Set SerialNumber to 'Unknown' if not found"  (#788510)
 - Subpackage the pkgconfig file
