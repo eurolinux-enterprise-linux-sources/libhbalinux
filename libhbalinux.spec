@@ -1,6 +1,6 @@
 Name:           libhbalinux
-Version:        1.0.16
-Release:        1%{?dist}
+Version:        1.0.17
+Release:        2%{?dist}
 Summary:        FC-HBAAPI implementation using scsi_transport_fc interfaces
 Group:          System Environment/Libraries
 License:        LGPLv2
@@ -8,8 +8,9 @@ URL:            http://www.open-fcoe.org
 # This source was cloned from upstream git
 Source0:        %{name}-%{version}.tar.gz
 Patch0:         libhbalinux-1.0.13-conf.patch
-BuildRequires:  libhbaapi-devel libpciaccess-devel libtool automake
-Requires:       libhbaapi
+BuildRequires:  libhbaapi-devel >= 2.2.9-2
+BuildRequires:  libpciaccess-devel libtool automake
+Requires:       libhbaapi >= 2.2.9-2
 
 %description
 SNIA HBAAPI vendor library built on top of the scsi_transport_fc interfaces.
@@ -70,6 +71,9 @@ fi
 %{_libdir}/%{name}.so
 
 %changelog
+* Thu Dec 17 2015 Chris Leech <cleech@redhat.com> - 1.0.16-2
+- 1074125 rebase to upstream v1.0.17
+
 * Thu Jun 20 2013 Petr Šabata <contyk@redhat.com> - 1.0.16-1
 - 1.0.16 bump, documentation and autotools scripts updates (#829810)
 - Fix an old bogus date in the changelog
