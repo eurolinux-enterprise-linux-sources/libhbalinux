@@ -1,16 +1,14 @@
 Name:               libhbalinux
-Version:            1.0.17
-Release:            2%{?dist}
+Version:            1.0.16
+Release:            1%{?dist}
 Summary:            FC-HBAAPI implementation using scsi_transport_fc interfaces
 Group:              System Environment/Libraries
 License:            LGPLv2
 URL:                http://www.open-fcoe.org
 Source0:            %{name}-%{version}.tar.gz
 Patch0:             libhbalinux-1.0.13-conf.patch
-Patch1:             libhbalinux-fix-non-pci-netdev.patch
-BuildRequires:      libhbaapi-devel >= 2.2.9-6
-BuildRequires:      libpciaccess-devel libtool automake systemd-devel
-Requires:           libhbaapi >= 2.2.9-6
+BuildRequires:      libhbaapi-devel libpciaccess-devel libtool automake
+Requires:           libhbaapi
 Requires(post):     grep
 Requires(postun):   grep
 
@@ -27,7 +25,8 @@ Requires:           pkgconfig
 The libhbalinux-devel package contains the library pkgconfig file.
 
 %prep
-%autosetup -p1
+%setup -q
+%patch0 -p1 -b .conf
 
 %build
 ./bootstrap.sh
@@ -69,21 +68,6 @@ fi
 %{_libdir}/%{name}.so
 
 %changelog
-* Mon Jul 06 2015 Chris Leech <cleech@redhat.com> - 1.0.17-2
-- 1056367 support non-PCI netdevs including s390x, virtio, bridges, etc.
-
-* Thu Jun 18 2015 Chris Leech <cleech@redhat.com> - 1.0.17-1
-- 1175802 rebase to upstream v1.0.17
-
-* Fri Oct 03 2014 Chris Leech <cleech@redhat.com> - 1.0.16-4
-- 1087093 sync with upstream, extends portspeed support up to 40 Gbit
-
-* Fri Jan 24 2014 Daniel Mach <dmach@redhat.com> - 1.0.16-3
-- Mass rebuild 2014-01-24
-
-* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 1.0.16-2
-- Mass rebuild 2013-12-27
-
 * Tue Jun 04 2013 Petr Šabata <contyk@redhat.com> - 1.0.16-1
 - 1.0.16 bump
 
