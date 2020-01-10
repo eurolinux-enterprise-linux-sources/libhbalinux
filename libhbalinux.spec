@@ -1,6 +1,6 @@
 Name:               libhbalinux
 Version:            1.0.16
-Release:            1%{?dist}
+Release:            3%{?dist}
 Summary:            FC-HBAAPI implementation using scsi_transport_fc interfaces
 Group:              System Environment/Libraries
 License:            LGPLv2
@@ -68,6 +68,12 @@ fi
 %{_libdir}/%{name}.so
 
 %changelog
+* Fri Jan 24 2014 Daniel Mach <dmach@redhat.com> - 1.0.16-3
+- Mass rebuild 2014-01-24
+
+* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 1.0.16-2
+- Mass rebuild 2013-12-27
+
 * Tue Jun 04 2013 Petr Šabata <contyk@redhat.com> - 1.0.16-1
 - 1.0.16 bump
 
